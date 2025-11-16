@@ -12,6 +12,12 @@ type Order struct {
 	createdAt time.Time
 }
 
+func (o *Order) ChangeStatus(status string) {
+
+	o.status = status
+
+}
+
 func main() {
 
 	// var order Order
@@ -21,7 +27,7 @@ func main() {
 		status:    "completed",
 		createdAt: time.Now(),
 	}
-
+	order.ChangeStatus("pending")
 	fmt.Println("My order Struct: ", order)
 
 }
