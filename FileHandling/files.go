@@ -119,11 +119,21 @@ func StreamingReadWrite() {
 	fmt.Println("Success")
 }
 
+func FileDel() {
+	err := os.Remove("exampledest.txt")
+	if err != nil {
+		panic(err)
+	}
+	fmt.Println("File Deleted")
+}
+
 func main() {
 
 	// fileFeatures()
 	// fileRead()
 	// ReadFolders()
-	StreamingReadWrite()
 	// writeFile()
+	// StreamingReadWrite()
+	FileDel()
+
 }
