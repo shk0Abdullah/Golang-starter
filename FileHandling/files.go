@@ -1,6 +1,7 @@
 package main
 
 import (
+	"bufio"
 	"fmt"
 	"os"
 )
@@ -82,10 +83,47 @@ func writeFile() {
 	f.Write(bytes)
 }
 
+func StreamingReadWrite() {
+	// read and write to another file using streaming
+	source, err := os.Open("example.txt")
+	if err != nil {
+		panic(err)
+	}
+	defer source.Close()
+	dest, err := os.Create("exampledest.txt")
+	if err != nil {
+		panic(err)
+	}
+	defer dest.Close()
+	// wanna use streaming use built in library bufio
+	// Create a reader first
+	reader := bufio.NewReader(source)
+	writer := bufio.NewWriter(dest)
+	// pipe the flow get the data from reader to writer
+	// While loop does not exist in go
+	for {
+		b, err := reader.ReadByte()
+		if err != nil {
+			if err.Error() != "EOF" {
+				panic(err)
+			}
+			break
+		}
+		e := writer.WriteByte(b)
+		if e != nil {
+			panic(e)
+		}
+
+	}
+	writer.Flush()
+	fmt.Println("Success")
+}
+
 func main() {
 
 	// fileFeatures()
 	// fileRead()
 	// ReadFolders()
-	writeFile()
+	StreamingReadWrite()
+	// writeFile()
 }
