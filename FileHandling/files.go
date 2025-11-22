@@ -134,6 +134,6 @@ func main() {
 	// ReadFolders()
 	// writeFile()
 	// StreamingReadWrite()
-	FileDel()
+	// FileDel()
 
 }
